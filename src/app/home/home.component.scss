@@ -1,0 +1,150 @@
+.page {
+    padding: 24px;
+    color: #FFFFFF66;
+
+    .orange {
+        background: #e65100;
+    }
+
+    .green {
+        background: #2e7d32;
+    }
+
+    .red {
+        background: #c62828;
+    }
+
+    .blue {
+        background: #1976d2;
+    }
+
+    .purple {
+        background: #ab47bc;
+    }
+
+    .pink {
+        background: #d81b60;
+    }
+
+    .row1 {
+        height: 225px;
+
+        .current-value {
+            position: absolute;
+            right: 16px;
+            top: 152px;
+        }
+
+        h3 {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            color: #FFFFFF;
+        }
+
+        p {
+            color: #FFFFFF99;
+            font-size: 12px;
+            margin-bottom: 0;
+            width: 300px;
+
+            &.wide {
+                width: 390px;
+            }
+        }
+
+        npt-line-chart, npt-forecast {
+            display: block;
+            margin-top: -24px;
+            border: 1px solid transparent;
+            border-radius: 3px;
+        }
+    }
+
+    .row2 {
+        height: 150px;
+
+        .badge {
+            padding: 16px;
+            height: 24px;
+            width: 24px;
+            position: absolute;
+            top: -24px;
+            border: 1px solid transparent;
+            border-radius: 3px;
+        }
+
+        h4 {
+            color: #FFFFFF99;
+            text-align: right;
+            min-height: 24px;
+        }
+
+        h1 {
+            text-align: right;
+            font-size: 36px;
+            line-height: 40px;
+            text-transform: capitalize;
+            max-width: 310px;
+            min-height: 40px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        hr {
+            border: 1px solid #ffffff11;
+        }
+
+        p {
+            color: #FFFFFF99;
+            font-size: .9em;
+        }
+
+        .no-music {
+            display: block;
+            width: 64px;
+            height: 64px;
+            font-size: 64px;
+            margin: auto;
+            margin-top: 28px;
+            color: #ffffff66;
+        }
+    }
+
+    .row3 {
+        height: 300px;
+
+        .banner {
+            padding: 8px;
+            margin-top: -24px;
+        }
+
+        table {
+            background: none;
+            width: 534px;
+
+            ::ng-deep thead {
+                display: none;
+            }
+
+            ::ng-deep tbody tr:last-child td {
+                border: none;
+            }
+
+            .column0 {
+                padding-left:0;
+                width: 8px;
+            }
+            .column1 {
+                padding-left: 16px;
+            }
+        }
+        .picture-box {
+            width: 816px;
+
+            img:first-child {
+                margin-right: 16px;
+            }
+        }
+    }
+}

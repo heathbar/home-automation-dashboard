@@ -1,0 +1,16 @@
+:host > div {
+    height: 141px;
+
+    div {
+        text-align: center;
+        
+        h3, p {
+            margin: -8px;
+        }
+
+        img {
+            height: 72px;
+            width: 72px;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<div fxLayout="row" class="screen-container">
+  <div fxLayout="column" fxLayoutAlign="start stretch" class="menu mat-elevation-z8">
+    <a mat-flat-button routerLink="/home" routerLinkActive="active">
+      <mat-icon>home</mat-icon>
+    </a>
+    <a mat-flat-button routerLink="/music" routerLinkActive="active">
+      <mat-icon>music_note</mat-icon>
+    </a>
+    <a mat-flat-button routerLink="/calendar" routerLinkActive="active">
+      <mat-icon>calendar_today</mat-icon>
+    </a>
+    <a mat-flat-button routerLink="/cameras" routerLinkActive="active">
+      <mat-icon>camera_alt</mat-icon>
+    </a>
+  </div>
+  <div fxFlex class="content-window">
+    <router-outlet></router-outlet>
+  </div>
+</div>

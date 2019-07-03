@@ -1,0 +1,7 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex *ngFor="let day of forecast">
+    <h3>{{day.dayName}}</h3>
+    <img [src]="day.icon" />
+    <p>{{day.highTemp}}° | {{day.lowTemp}}°</p>
+  </div>
+</div>
