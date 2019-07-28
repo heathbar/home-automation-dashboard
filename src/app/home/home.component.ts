@@ -67,7 +67,9 @@ export class HomeComponent implements OnInit {
   camera2$ = this.dashboardService.camera2$;
 
   today$ = this.calendarService.today$;
-  appointments$ = this.calendarService.appointments$;
+  appointments$ = this.calendarService.appointments$.pipe(
+    map(appts => appts.slice(0, 5))
+  );
   apptColumns = ['day-color', 'day', 'time', 'title'];
 
   ngOnInit() {

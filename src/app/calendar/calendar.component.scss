@@ -3,6 +3,30 @@
     color: #FFFFFF66;
 
     .row1 {
+        .banner {
+            padding: 8px;
+            margin-top: -24px;
+        }
 
+        table {
+            background: none;
+            width: 1400px;
+
+            ::ng-deep thead {
+                display: none;
+            }
+
+            ::ng-deep tbody tr:last-child td {
+                border: none;
+            }
+
+            .column0 {
+                padding-left:0;
+                width: 8px;
+            }
+            .column1 {
+                padding-left: 16px;
+            }
+        }
     }
 }

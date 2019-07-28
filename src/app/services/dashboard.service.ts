@@ -170,7 +170,7 @@ export class DashboardService {
                     sameDay: '[Today]',
                     lastDay: '[Yesterday]',
                     lastWeek: 'dddd',
-                    sameElse: '!!!'
+                    sameElse: 'MMMM Qo'
                   }),
                   subtext
                 };

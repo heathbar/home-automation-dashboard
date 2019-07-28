@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, of, interval } from 'rxjs';
 
 import * as moment from 'moment';
-import { switchMap, delay, switchMapTo, startWith, map } from 'rxjs/operators';
+import { switchMap, delay, switchMapTo, startWith, map, share } from 'rxjs/operators';
 
 declare var gapi;
 
@@ -37,14 +37,16 @@ export class CalendarService {
   get today$(): Observable<string> {
     return interval(60 * 1000).pipe(
       startWith(0),
-      map(() => moment().format('dddd, MMMM Do'))
+      map(() => moment().format('dddd, MMMM Do')),
+      share()
     );
   }
 
   get appointments$(): Observable<string[]> {
     return interval(60 * 60 * 1000).pipe(
       startWith(0),
-      switchMapTo(this.loadAppointments())
+      switchMapTo(this.loadAppointments()),
+      share()
     );
   }
 
@@ -67,7 +69,7 @@ export class CalendarService {
       timeMin: moment().startOf('day').toISOString(),
       showDeleted: false,
       singleEvents: true,
-      maxResults: 5,
+      maxResults: 16,
       orderBy: 'startTime'
     });
 
@@ -81,15 +83,18 @@ export class CalendarService {
         let prevIndex = -1;
 
         events.forEach(event => {
-          const day = moment(event.start.dateTime || event.start.date);
+          const startDay = moment(event.start.dateTime || event.start.date);
+          const endDay = moment(event.end.dateTime || event.end.date);
 
-          if (!prevDay || prevDay !== day.format('ddd')) {
-            prevDay = day.format('ddd');
+          if (!prevDay || prevDay !== startDay.format('ddd')) {
+            prevDay = startDay.format('ddd');
             prevIndex++;
           }
 
-          const time = event.start.date ? 'All-Day' : day.format('h:mma');
-          appointments.push({ dayColor: colors[prevIndex % 3], day: day.format('ddd'), time, title: event.summary});
+          const dayDisplay = (startDay.format('ddd') !== endDay.format('ddd')) ? `${startDay.format('ddd')}-${endDay.format('ddd')}` : startDay.format('ddd')
+
+          const time = event.start.date ? 'All-Day' : startDay.format('h:mma');
+          appointments.push({ dayColor: colors[prevIndex % 3], day: dayDisplay, time, title: event.summary});
         });
       } else {
         appointments.push('No upcoming events found.');
