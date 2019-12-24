@@ -150,7 +150,7 @@ export class DashboardService {
         }
 
         // Since no stations are running, lookup last run time
-        return this.http.get(`${host}/jl${pw}&hist=30`).pipe(
+        return this.http.get(`${host}/jl${pw}&hist=365`).pipe(
           map((log: any[][]) => {
             let rainDelayMessage;
 
