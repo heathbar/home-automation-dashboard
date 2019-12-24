@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, of, interval } from 'rxjs';
+import { Observable, Subject, of, interval, BehaviorSubject } from 'rxjs';
 
 import * as moment from 'moment';
-import { switchMap, delay, switchMapTo, startWith, map, share } from 'rxjs/operators';
+import { switchMap, delay, switchMapTo, startWith, map, share, shareReplay, tap, publish } from 'rxjs/operators';
 
 declare var gapi;
 
@@ -14,10 +14,15 @@ export class CalendarService {
   private clientId;
   private scopes = ['https://www.googleapis.com/auth/calendar.readonly'];
   private calendarId;
+  private isAuthenticated = false;
 
-  public isAuthenticated = false;
-  public userName: string;
-  public userImageUrl: string;
+
+  // This can't be a function because that makes the shareReplay() operator pointless
+  appointments$ = interval(60 * 60  * 1000).pipe(
+    startWith(0),
+    switchMapTo(this.loadAppointments()),
+    shareReplay()
+  );
 
   constructor() {
     gapi.load('client:auth2');
@@ -37,16 +42,7 @@ export class CalendarService {
   get today$(): Observable<string> {
     return interval(60 * 1000).pipe(
       startWith(0),
-      map(() => moment().format('dddd, MMMM Do')),
-      share()
-    );
-  }
-
-  get appointments$(): Observable<string[]> {
-    return interval(60 * 60 * 1000).pipe(
-      startWith(0),
-      switchMapTo(this.loadAppointments()),
-      share()
+      map(() => moment().format('dddd, MMMM Do'))
     );
   }
 
@@ -110,6 +106,7 @@ export class CalendarService {
       setTimeout(() => this.authenticate(false, resolve, reject), 1000);
     }).then(this.initializeGoogleCalendarAPI);
   }
+
   private authenticate(immediate: boolean, resolve: Function, reject: Function) {
     const authorisationRequestData = {
       client_id: this.clientId,

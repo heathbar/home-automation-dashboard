@@ -3,6 +3,8 @@
     color: #FFFFFF66;
 
     .row1 {
+        font-size: 2em;
+
         .banner {
             padding: 8px;
             margin-top: -24px;
@@ -18,6 +20,10 @@
 
             ::ng-deep tbody tr:last-child td {
                 border: none;
+            }
+
+            ::ng-deep .mat-cell {
+                font-size: 1em;
             }
 
             .column0 {
