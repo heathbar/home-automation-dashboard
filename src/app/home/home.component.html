@@ -1,6 +1,6 @@
-<div fxLayout="column" fxLayoutGap="48px" class="page">
+<h1 class="title">Paddock Home</h1>
 
-  <h1>Paddock Home</h1>
+<div fxLayout="column" fxLayoutGap="48px" class="page">
 
   <div fxLayout="row" fxLayoutGap="24px" class="row1">
     <mat-card fxFlex class="card1">
@@ -27,7 +27,7 @@
 
 
   <div fxLayout="row" fxLayoutGap="24px" class="row2">
-    <mat-card fxFlex>
+    <mat-card fxFlex="20%">
       <div class="badge blue">
         <mat-icon>home</mat-icon>
       </div>
@@ -36,7 +36,7 @@
       <hr>
       <p>{{ thermostatStatus$ | async }}</p>
     </mat-card>
-    <mat-card fxFlex>
+    <mat-card fxFlex="30%">
       <div class="badge orange">
         <mat-icon>drive_eta</mat-icon>
       </div>
@@ -48,7 +48,7 @@
       <p>{{ garageDoor$ | async }} since {{ garageDoorLastChangeDate$ | async }}</p>
 
     </mat-card>
-    <mat-card fxFlex>
+    <mat-card fxFlex="30%">
       <div class="badge red">
         <mat-icon>music_note</mat-icon>
       </div>
@@ -64,7 +64,7 @@
 
 
     </mat-card>
-    <mat-card fxFlex>
+    <mat-card fxFlex="20%">
       <div class="badge green">
         <mat-icon>local_florist</mat-icon>
       </div>
@@ -109,10 +109,10 @@
     </mat-card>
 
     <mat-card>
-      <h2 class="banner orange">Cameras</h2>
+      <h2 class="banner orange">Boy's Room</h2>
       <div class="picture-box">
-        <img *ngIf="camera1$ | async as src" [src]="src" width="400" />
-        <img *ngIf="camera2$ | async as src" [src]="src" width="400" />
+        <img *ngIf="camera1$ | async as src" [src]="src" width="450" />
+        <img *ngIf="camera2$ | async as src" [src]="src" width="462" />
     </div>
     </mat-card>
   </div>

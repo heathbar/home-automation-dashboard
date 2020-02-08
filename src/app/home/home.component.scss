@@ -1,3 +1,9 @@
+h1.title {
+    padding: 24px 24px 0;
+    margin: 0;
+    color: #FFFFFF66;
+}
+
 .page {
     padding: 24px;
     color: #FFFFFF66;
@@ -60,7 +66,7 @@
             font-size: 36px;
             line-height: 40px;
             text-transform: capitalize;
-            max-width: 310px;
+            max-width: 396px;
             min-height: 40px;
             white-space: nowrap;
             overflow: hidden;
@@ -88,7 +94,7 @@
     }
 
     .row3 {
-        height: 300px;
+        height: 325px;
 
         .banner {
             padding: 8px;
@@ -116,7 +122,7 @@
             }
         }
         .picture-box {
-            width: 816px;
+            width: 930px;
 
             img:first-child {
                 margin-right: 16px;

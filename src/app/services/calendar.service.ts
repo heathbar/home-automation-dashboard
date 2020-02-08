@@ -87,7 +87,7 @@ export class CalendarService {
             prevIndex++;
           }
 
-          const dayDisplay = (startDay.format('ddd') !== endDay.format('ddd')) ? `${startDay.format('ddd')}-${endDay.format('ddd')}` : startDay.format('ddd')
+          const dayDisplay = (startDay.format('ddd') !== endDay.subtract(1, 'second').format('ddd')) ? `${startDay.format('ddd')}-${endDay.format('ddd')}` : startDay.format('ddd');
 
           const time = event.start.date ? 'All-Day' : startDay.format('h:mma');
           appointments.push({ dayColor: colors[prevIndex % 3], day: dayDisplay, time, title: event.summary});
