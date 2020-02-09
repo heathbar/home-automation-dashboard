@@ -58,6 +58,8 @@ export class HomeComponent implements OnInit {
     })
   );
 
+  drivewayLights$ = this.dashboardService.drivewayLights$;
+
   mediaArtist$ = this.dashboardService.media$.pipe(pluck('artist'));
   mediaTitle$ = this.dashboardService.media$.pipe(pluck('title'));
   mediaPlayer$ = this.dashboardService.media$.pipe(pluck('player'));

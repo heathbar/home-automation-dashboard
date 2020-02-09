@@ -73,6 +73,13 @@ h1.title {
             text-overflow: ellipsis;
         }
 
+        mat-icon.bulb {
+            font-size: 36px;
+            position: absolute;
+            top: 56px;
+            left: 26px;
+        }
+
         hr {
             border: 1px solid #ffffff11;
         }

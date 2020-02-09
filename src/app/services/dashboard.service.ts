@@ -59,6 +59,13 @@ export class DashboardService {
     );
   }
 
+  get drivewayLights$(): Observable<boolean> {
+    return this.homeAssistantService.events$.pipe(
+      map(e => e['light.driveway'].state === 'on' || e['switch.garage'].state === 'on'),
+      distinctUntilChanged()
+    );
+  }
+
   get media$(): Observable<any> {
     return this.homeAssistantService.events$.pipe(
       map(entities => {

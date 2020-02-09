@@ -43,7 +43,7 @@
 
       <h4>Garage Door</h4>
       <h1>{{ garageDoor$ | async }}</h1>
-
+      <mat-icon *ngIf="drivewayLights$ | async" class="bulb">emoji_objects</mat-icon>
       <hr>
       <p>{{ garageDoor$ | async }} since {{ garageDoorLastChangeDate$ | async }}</p>
 
