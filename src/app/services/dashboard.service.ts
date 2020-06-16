@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HomeAssistantService } from './home-assistant.service';
 import { Injectable } from '@angular/core';
-import { map, distinctUntilChanged, distinctUntilKeyChanged, filter, withLatestFrom, startWith, switchMap, switchMapTo, tap } from 'rxjs/operators';
+import { map, distinctUntilChanged, distinctUntilKeyChanged, filter, withLatestFrom, startWith, switchMap, switchMapTo, tap, shareReplay } from 'rxjs/operators';
 import { Observable, interval, of } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
@@ -12,6 +12,7 @@ import { environment } from '../../environments/environment';
 export class DashboardService {
 
   private sprinklerPassword;
+  transparentPixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
 
   constructor(private homeAssistantService: HomeAssistantService, private http: HttpClient) {
     this.sprinklerPassword = localStorage.getItem('sprinkler-password');
@@ -61,7 +62,7 @@ export class DashboardService {
 
   get drivewayLights$(): Observable<boolean> {
     return this.homeAssistantService.events$.pipe(
-      map(e => e['light.driveway'].state === 'on' || e['switch.garage'].state === 'on'),
+      map(e => e['light.driveway_lights'].state === 'on' || e['switch.garage'].state === 'on'),
       distinctUntilChanged()
     );
   }
@@ -137,67 +138,94 @@ export class DashboardService {
     const host = environment.sprinklerHost;
     const pw = `?pw=${this.sprinklerPassword}`;
 
-    return interval(5000).pipe(
-      startWith(null),
-      switchMapTo(this.http.get(`${host}/js${pw}`)),
-      switchMap((response: any) => {
+    return this.homeAssistantService.enabled$.pipe(
+      switchMap(enabled => {
+        if (enabled) {
+          return interval(5000).pipe(
+            startWith(null),
+            switchMapTo(this.http.get(`${host}/js${pw}`)),
+            switchMap((response: any) => {
 
-        // Check if any stations are running right now
-        for (let i = 0; i < response.sn.length; i++) {
-          if (response.sn[i] === 1) {
+              // Check if any stations are running right now
+              for (let i = 0; i < response.sn.length; i++) {
+                if (response.sn[i] === 1) {
 
-            // Lookup name of currently running station
-            return this.http.get(`${host}/jn${pw}`).pipe(
-              map((stations: any) => ({
-                label: 'Sprinkler Running',
-                value: stations.snames[i],
-                subtext: ''
-              })));
-          }
-        }
-
-        // Since no stations are running, lookup last run time
-        return this.http.get(`${host}/jl${pw}&hist=365`).pipe(
-          map((log: any[][]) => {
-            let rainDelayMessage;
-
-            // Loop backwards through the events looking for the most recent rain and/or water event
-            for (let i = log.length - 1; i >= 0; i--) {
-              const [programId, stationId, duration, endTime] = log[i];
-
-              if (programId === 0 && (stationId === 'rs' || stationId === 'rd') && !rainDelayMessage) {
-                rainDelayMessage = `Rain delay until ${moment(endTime * 1000).format('dddd h:mma')}`;
-              } else if (programId !== 0) {
-                const defaultSubtext = programId > 50 ? 'The program was initiated manually' : 'The program ran as scheduled';
-                const subtext = rainDelayMessage ? rainDelayMessage : defaultSubtext;
-
-                return {
-                  label: 'Sprinkler Last Ran',
-                  value: moment(endTime * 1000).add(5, 'hours').calendar(null, {
-                    sameDay: '[Today]',
-                    lastDay: '[Yesterday]',
-                    lastWeek: 'dddd',
-                    sameElse: 'MMMM Qo'
-                  }),
-                  subtext
-                };
+                  // Lookup name of currently running station
+                  return this.http.get(`${host}/jn${pw}`).pipe(
+                    map((stations: any) => ({
+                      label: 'Sprinkler Running',
+                      value: stations.snames[i],
+                      subtext: ''
+                    })));
+                }
               }
-            }
-          })
-        );
+
+              // Since no stations are running, lookup last run time
+              return this.http.get(`${host}/jl${pw}&hist=365`).pipe(
+                map((log: any[][]) => {
+                  let rainDelayMessage;
+
+                  // Loop backwards through the events looking for the most recent rain and/or water event
+                  for (let i = log.length - 1; i >= 0; i--) {
+                    const [programId, stationId, duration, endTime] = log[i];
+
+                    if (programId === 0 && (stationId === 'rs' || stationId === 'rd') && !rainDelayMessage) {
+                      rainDelayMessage = `Rain delay until ${moment(endTime * 1000).format('dddd h:mma')}`;
+                    } else if (programId !== 0) {
+                      const defaultSubtext = programId > 50 ? 'The program was initiated manually' : 'The program ran as scheduled';
+                      const subtext = rainDelayMessage ? rainDelayMessage : defaultSubtext;
+
+                      return {
+                        label: 'Sprinkler Last Ran',
+                        value: moment(endTime * 1000).add(5, 'hours').calendar(null, {
+                          sameDay: '[Today]',
+                          lastDay: '[Yesterday]',
+                          lastWeek: 'dddd',
+                          sameElse: 'MMMM Qo'
+                        }),
+                        subtext
+                      };
+                    }
+                  }
+                })
+              );
+            })
+          );
+        } else {
+          return of({});
+        }
       })
     );
   }
 
   get camera1$(): Observable<string> {
-    return this.homeAssistantService.events$.pipe(
-      map(e => `${HomeAssistantService.host}${e['camera.boys_camera'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`),
+    return this.homeAssistantService.enabled$.pipe(
+      switchMap(enabled => {
+        if (enabled) {
+          return this.homeAssistantService.events$.pipe(
+            map(e => {
+                return `${HomeAssistantService.host}${e['camera.boys_camera'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`;
+            }),
+          );
+        } else {
+          return of(this.transparentPixel);
+        }
+      }),
       distinctUntilChanged()
     );
   }
+
   get camera2$(): Observable<string> {
-    return this.homeAssistantService.events$.pipe(
-      map(e => `${HomeAssistantService.host}${e['camera.play_room'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`),
+    return this.homeAssistantService.enabled$.pipe(
+      switchMap(enabled => {
+        if (enabled) {
+          return this.homeAssistantService.events$.pipe(
+            map(e => `${HomeAssistantService.host}${e['camera.play_room'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`)
+          );
+        } else {
+          return of(this.transparentPixel);
+        }
+      }),
       distinctUntilChanged()
     );
   }
