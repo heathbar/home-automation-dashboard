@@ -1,7 +1,7 @@
 import { HomeAssistantService } from './home-assistant.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Forecast } from '../forecast.model';
 import * as moment from 'moment';
 
@@ -14,13 +14,23 @@ export class WeatherService {
 
   get outdoorTemperature$(): Observable<number> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.dark_sky_temperature']),
       map(e => Math.round(e['sensor.dark_sky_temperature'].state)),
+      distinctUntilChanged()
+    );
+  }
+
+  get outdoorHumidity$(): Observable<number> {
+    return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.dark_sky_humidity']),
+      map(e => Math.round(e['sensor.dark_sky_humidity'].state)),
       distinctUntilChanged()
     );
   }
 
   get hourlySummary$(): Observable<string> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.dark_sky_hourly_summary']),
       map(e => e['sensor.dark_sky_hourly_summary'].state),
       distinctUntilChanged()
     );
@@ -28,6 +38,7 @@ export class WeatherService {
 
   get dailySummary$(): Observable<string> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.dark_sky_daily_summary']),
       map(e => e['sensor.dark_sky_daily_summary'].state),
       distinctUntilChanged()
     );
@@ -35,6 +46,7 @@ export class WeatherService {
 
   get forecast$(): Observable<Forecast[]> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.dark_sky_daytime_high_temperature_0d']),
       map(event => {
         const forecast = [];
         for (let i = 0; i < 5; i++) {

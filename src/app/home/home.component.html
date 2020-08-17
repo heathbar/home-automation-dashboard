@@ -5,8 +5,9 @@
   <div fxLayout="row" fxLayoutGap="24px" class="row1">
     <mat-card fxFlex class="card1">
       <npt-line-chart [data]="outdoorTemperatureGraph$ | async" unit="°" class="green"></npt-line-chart>
-      <h3>Outdoor Temperature</h3>
-      <h1 class="mat-display-3 current-value">{{ outdoorTemperature$ | async }}°</h1>
+      <h3>Outdoor Conditions</h3>
+      <h1 class="mat-display-3 current-value">{{ outdoorTemperature$ | async }}° </h1>
+      <p>{{ outdoorHumidity$ | async }}% Humidity</p>
       <p>{{ hourlySummary$ | async }}</p>
     </mat-card>
 
@@ -33,8 +34,9 @@
       </div>
       <h4>Indoor Temperature</h4>
       <h1>{{ indoorTemperature$ | async }}°</h1>
+      <mat-icon *ngIf="thermostatStatusIcon$ | async as icon" class="row-2-icon">{{icon}}</mat-icon>
       <hr>
-      <p>{{ thermostatStatus$ | async }}</p>
+      <p>{{ thermostatStatusText$ | async }}</p>
     </mat-card>
     <mat-card fxFlex="30%">
       <div class="badge orange">
@@ -43,7 +45,7 @@
 
       <h4>Garage Door</h4>
       <h1>{{ garageDoor$ | async }}</h1>
-      <mat-icon *ngIf="drivewayLights$ | async" class="bulb">emoji_objects</mat-icon>
+      <mat-icon *ngIf="drivewayLights$ | async" class="row-2-icon">emoji_objects</mat-icon>
       <hr>
       <p>{{ garageDoor$ | async }} since {{ garageDoorLastChangeDate$ | async }}</p>
 

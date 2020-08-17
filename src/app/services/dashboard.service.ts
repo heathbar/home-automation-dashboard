@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HomeAssistantService } from './home-assistant.service';
 import { Injectable } from '@angular/core';
 import { map, distinctUntilChanged, distinctUntilKeyChanged, filter, withLatestFrom, startWith, switchMap, switchMapTo, tap, shareReplay } from 'rxjs/operators';
-import { Observable, interval, of } from 'rxjs';
+import { Observable, interval, of, NEVER } from 'rxjs';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
 
@@ -25,6 +25,7 @@ export class DashboardService {
   get thermostat$(): Observable<any> {
     return this.homeAssistantService.events$.pipe(
       map(e => e['climate.thermostat']),
+      filter(e => e),
     );
   }
 
@@ -42,12 +43,27 @@ export class DashboardService {
     );
   }
 
-  get thermostatStatus$(): Observable<string> {
+  get thermostatStatusIcon$(): Observable<string> {
     return this.thermostat$.pipe(
       map(t => {
-        const system = (t.state === 'idle') ? 'idle' : `${t.state}ing`;
+        const hvac = t.attributes.hvac_action;
+        switch (hvac) {
+          case 'cooling':
+            return 'ac_unit';
+          case 'heating':
+            return 'local_fire_department';
+          default:
+            return '';
+        }
+      }),
+      distinctUntilChanged()
+    );
+  }
 
-        return `System: ${system}, Fan: ${t.attributes.fan}`;
+  get thermostatStatusText$(): Observable<string> {
+    return this.thermostat$.pipe(
+      map(t => {
+        return `System Mode: ${t.state}, HVAC: ${t.attributes.hvac_action}, Fan: ${t.attributes.fan_action}`;
       }),
       distinctUntilChanged()
     );
@@ -55,6 +71,7 @@ export class DashboardService {
 
   get garageDoor$(): Observable<string> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.garage_door']),
       map(e => e['sensor.garage_door'].state),
       distinctUntilChanged(),
     );
@@ -62,6 +79,7 @@ export class DashboardService {
 
   get drivewayLights$(): Observable<boolean> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['light.driveway_lights'] && e['switch.garage']),
       map(e => e['light.driveway_lights'].state === 'on' || e['switch.garage'].state === 'on'),
       distinctUntilChanged()
     );
@@ -146,6 +164,12 @@ export class DashboardService {
             switchMapTo(this.http.get(`${host}/js${pw}`)),
             switchMap((response: any) => {
 
+              if (!response.sn) {
+                console.log('Invalid response from sprinkler');
+                console.log(response);
+                return NEVER;
+              }
+
               // Check if any stations are running right now
               for (let i = 0; i < response.sn.length; i++) {
                 if (response.sn[i] === 1) {
@@ -203,6 +227,7 @@ export class DashboardService {
       switchMap(enabled => {
         if (enabled) {
           return this.homeAssistantService.events$.pipe(
+            filter(e => e['camera.boys_camera']),
             map(e => {
                 return `${HomeAssistantService.host}${e['camera.boys_camera'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`;
             }),
@@ -220,6 +245,7 @@ export class DashboardService {
       switchMap(enabled => {
         if (enabled) {
           return this.homeAssistantService.events$.pipe(
+            filter(e => e['camera.play_room']),
             map(e => `${HomeAssistantService.host}${e['camera.play_room'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`)
           );
         } else {

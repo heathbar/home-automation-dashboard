@@ -2,7 +2,7 @@ import { CalendarService } from './../services/calendar.service';
 import { WeatherService } from '../services/weather.service';
 import { DashboardService } from '../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
-import { pluck, throttleTime, map,  } from 'rxjs/operators';
+import { pluck, throttleTime, map, tap,  } from 'rxjs/operators';
 import { EnergyService } from '../services/energy.service';
 import { timeSeries } from '../services/time-series.operator';
 import * as moment from 'moment';
@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     private calendarService: CalendarService) { }
 
   outdoorTemperature$ = this.weatherService.outdoorTemperature$;
+  outdoorHumidity$ = this.weatherService.outdoorHumidity$;
   outdoorTemperatureGraph$ = this.outdoorTemperature$.pipe(
     throttleTime(5 * 60 * 1000),
     timeSeries('outdoor-temperature', 24)
@@ -40,7 +41,8 @@ export class HomeComponent implements OnInit {
 
   indoorTemperature$ = this.dashboardService.indoorTemperature$;
   thermostatMode$ = this.dashboardService.thermostatMode$;
-  thermostatStatus$ = this.dashboardService.thermostatStatus$;
+  thermostatStatusText$ = this.dashboardService.thermostatStatusText$;
+  thermostatStatusIcon$ = this.dashboardService.thermostatStatusIcon$;
 
   garageDoor$ = this.dashboardService.garageDoor$.pipe(
     map(state => this.capitalizeFirstCharacter(state))
