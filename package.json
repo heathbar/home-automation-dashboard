@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
     "angular-highcharts": "^8.0.2",
-    "highcharts": "^7.1.2",
+    "highcharts": "^7.2.2",
     "home-assistant-js-websocket": "^4.2.2",
     "moment": "^2.24.0",
     "rxjs": "~6.5.4",
