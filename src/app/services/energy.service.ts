@@ -20,6 +20,7 @@ export class EnergyService {
 
   get currentPowerUsage$(): Observable<number> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.energy_usage']),
       map(e => parseInt(e['sensor.energy_usage'].state, 10)),
       distinctUntilChanged()
     );
@@ -27,6 +28,7 @@ export class EnergyService {
 
   get dailyEnergyUsage$(): Observable<number> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.daily_usage']),
       map(e => e['sensor.daily_usage'].state),
       distinctUntilChanged()
     );
@@ -34,6 +36,7 @@ export class EnergyService {
 
   get monthlyEnergyUsage$(): Observable<number> {
     return this.homeAssistantService.events$.pipe(
+      filter(e => e['sensor.monthly_usage']),
       map(e => e['sensor.monthly_usage'].state),
       distinctUntilChanged()
     );

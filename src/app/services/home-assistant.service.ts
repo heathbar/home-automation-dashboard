@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { shareReplay, map, distinctUntilChanged } from 'rxjs/operators';
+import { shareReplay, map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { getAuth, createConnection, subscribeEntities } from 'home-assistant-js-websocket';
 import { environment } from 'src/environments/environment';
 
@@ -23,6 +23,7 @@ export class HomeAssistantService {
 
   get enabled$(): Observable<boolean> {
     return this.events$.pipe(
+      filter(e => e['switch.dashboard']),
       map(e => e['switch.dashboard'].state === 'on'),
       distinctUntilChanged(),
       shareReplay(1)

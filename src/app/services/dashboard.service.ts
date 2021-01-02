@@ -227,9 +227,9 @@ export class DashboardService {
       switchMap(enabled => {
         if (enabled) {
           return this.homeAssistantService.events$.pipe(
-            filter(e => e['camera.boys_camera']),
+            filter(e => e['camera.cameraf']),
             map(e => {
-                return `${HomeAssistantService.host}${e['camera.boys_camera'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`;
+              return `${HomeAssistantService.host}${e['camera.cameraf'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`;
             }),
           );
         } else {
@@ -245,8 +245,8 @@ export class DashboardService {
       switchMap(enabled => {
         if (enabled) {
           return this.homeAssistantService.events$.pipe(
-            filter(e => e['camera.play_room']),
-            map(e => `${HomeAssistantService.host}${e['camera.play_room'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`)
+            filter(e => e['camera.camerad']),
+            map(e => `${HomeAssistantService.host}${e['camera.camerad'].attributes.entity_picture.replace('camera_proxy', 'camera_proxy_stream')}`)
           );
         } else {
           return of(this.transparentPixel);
