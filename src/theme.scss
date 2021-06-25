@@ -1,17 +1,17 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$neptune-primary: mat-palette($mat-indigo, 600);
-$neptune-accent:  mat-palette($mat-pink);
-$neptune-warn:    mat-palette($mat-deep-orange);
+$neptune-primary: mat.define-palette(mat.$indigo-palette, 600);
+$neptune-accent:  mat.define-palette(mat.$pink-palette);
+$neptune-warn:    mat.define-palette(mat.$deep-orange-palette);
 // Create the theme object (a Sass map containing all of the palettes).
-$neptune-theme: mat-dark-theme($neptune-primary, $neptune-accent, $neptune-warn);
+$neptune-theme: mat.define-dark-theme($neptune-primary, $neptune-accent, $neptune-warn);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($neptune-theme);
+@include mat.all-component-themes($neptune-theme);
