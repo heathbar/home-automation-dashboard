@@ -43,6 +43,8 @@ export class HomeComponent implements OnInit {
   thermostatMode$ = this.dashboardService.thermostatMode$;
   thermostatStatusText$ = this.dashboardService.thermostatStatusText$;
   thermostatStatusIcon$ = this.dashboardService.thermostatStatusIcon$;
+  thermostatStatusAnimation$ = this.dashboardService.thermostatStatusAnimation$;
+  hvacBlower$ = this.dashboardService.hvacBlower$;
 
   garageDoor$ = this.dashboardService.garageDoor$.pipe(
     map(state => this.capitalizeFirstCharacter(state))

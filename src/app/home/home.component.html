@@ -30,11 +30,13 @@
   <div fxLayout="row" fxLayoutGap="24px" class="row2">
     <mat-card fxFlex="20%">
       <div class="badge blue">
-        <mat-icon>home</mat-icon>
+        <mat-icon>thermostat</mat-icon>
       </div>
       <h4>Indoor Temperature</h4>
       <h1>{{ indoorTemperature$ | async }}°</h1>
-      <mat-icon *ngIf="thermostatStatusIcon$ | async as icon" class="row-2-icon">{{icon}}</mat-icon>
+      <mat-icon *ngIf="thermostatStatusIcon$ | async as icon" class="row-2-icon" [ngClass]="thermostatStatusAnimation$ | async">{{icon}}</mat-icon>
+      <mat-icon *ngIf="hvacBlower$ | async" class="row-2-icon" style="left: 80px">air</mat-icon>
+      
       <hr>
       <p>{{ thermostatStatusText$ | async }}</p>
     </mat-card>

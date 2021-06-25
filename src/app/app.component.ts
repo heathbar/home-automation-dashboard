@@ -1,6 +1,7 @@
 import { AppService } from './app.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'npt-root',
@@ -13,6 +14,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.appService.page$.subscribe((page: string) => {
       this.router.navigate([page.toLowerCase()]);
+    });
+
+    interval(1000 * 60 * 60 * 4).subscribe(() => {
+      location.reload();
     });
   }
 }

@@ -46,12 +46,29 @@ export class DashboardService {
   get thermostatStatusIcon$(): Observable<string> {
     return this.thermostat$.pipe(
       map(t => {
+        const hvac = t.state;
+        switch (hvac) {
+          case 'cool':
+            return 'ac_unit';
+          case 'heat':
+            return 'local_fire_department';
+          default:
+            return '';
+        }
+      }),
+      distinctUntilChanged()
+    );
+  }
+
+  get thermostatStatusAnimation$(): Observable<string> {
+    return this.thermostat$.pipe(
+      map(t => {
         const hvac = t.attributes.hvac_action;
         switch (hvac) {
           case 'cooling':
-            return 'ac_unit';
+            return 'spinner';
           case 'heating':
-            return 'local_fire_department';
+            return 'flicker';
           default:
             return '';
         }
@@ -66,6 +83,12 @@ export class DashboardService {
         return `System Mode: ${t.state}, HVAC: ${t.attributes.hvac_action}, Fan: ${t.attributes.fan_action}`;
       }),
       distinctUntilChanged()
+    );
+  }
+
+  get hvacBlower$(): Observable<boolean> {
+    return this.thermostat$.pipe(
+      map(t => t.attributes.fan_action === 'running')
     );
   }
 
