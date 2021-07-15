@@ -1,0 +1,8 @@
+<div class="container">
+    <h2>Outdoor</h2>
+    
+    <div><span class="temperature">———</span>&nbsp;&nbsp;&nbsp; Temperature</div>
+    <div><span class="humidity">———</span>&nbsp;&nbsp;&nbsp; Humidity</div>
+
+</div>
+<npt-line-chart [data]="outdoorTemperatureGraph$ | async" unit="°"></npt-line-chart>

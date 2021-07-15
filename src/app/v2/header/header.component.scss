@@ -1,0 +1,25 @@
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #182037;
+    padding: 16px;
+    
+    h1 {
+        margin-bottom: 0;        
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    font: 600 24px / 32px Roboto, "Helvetica Neue", sans-serif;
+    
+    .date {
+        text-align: center;        
+    }
+    .clock {
+        text-align: right;
+    }
+
+}
+
+
+    

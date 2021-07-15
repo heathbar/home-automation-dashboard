@@ -1,4 +1,4 @@
-import { CalendarService } from './../services/calendar.service';
+import { CalendarService } from '../services/calendar.service';
 import { WeatherService } from '../services/weather.service';
 import { DashboardService } from '../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';

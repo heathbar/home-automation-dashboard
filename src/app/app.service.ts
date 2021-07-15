@@ -1,4 +1,4 @@
-import { HomeAssistantService } from './services/home-assistant.service';
+import { HomeAssistantService } from './v1/services/home-assistant.service';
 import { Injectable } from '@angular/core';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 

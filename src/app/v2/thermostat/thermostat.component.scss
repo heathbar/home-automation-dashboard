@@ -1,0 +1,29 @@
+:host {
+    background-color: #182037;
+    padding: 16px;
+
+    .container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-gap: 0 16px;
+
+        .icon {            
+            grid-row: span 2 / auto;
+            padding: 4px;
+            border-radius: 48px;
+            height: 42px;
+            width: 42px;
+            font-size: 42px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            color: rgb(255, 255, 255, .6)
+        }
+
+        div {
+            font-size: 32px;
+        }
+    }
+}

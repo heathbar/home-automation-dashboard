@@ -45,3 +45,6 @@ secrets.txt
 # System Files
 .DS_Store
 Thumbs.db
+
+src/assets/city
+src/assets/album-art.jpg

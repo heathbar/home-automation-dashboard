@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~12.1.0",
     "@angular/platform-browser-dynamic": "~12.1.0",
     "@angular/router": "~12.1.0",
+    "@ngrx/store": "^12.2.0",
     "angular-highcharts": "^12.0.0",
     "highcharts": "^9.1.2",
     "home-assistant-js-websocket": "^4.2.2",

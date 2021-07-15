@@ -1,0 +1,38 @@
+:host {
+    position: relative;
+    overflow: hide;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: 100%;
+
+    header {
+        padding: 16px;
+        z-index: 1;
+
+        h1 {
+            grid-column: span 8;
+        }
+
+        p.temperature {
+            grid-column: span 8;
+            font-size: 4em;
+        }
+
+        p.condition {
+            grid-column: span 8;
+        }
+    }
+
+}
+
+.background {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 200px 200px 0 0;
+    border-color: rgb(0, 0, 0, .3) transparent transparent transparent;
+}

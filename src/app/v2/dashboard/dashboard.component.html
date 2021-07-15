@@ -1,0 +1,29 @@
+<div class="container">
+
+    <npt-header></npt-header>
+
+    <npt-weather-widget></npt-weather-widget>
+    <npt-weather-current-conditions></npt-weather-current-conditions>
+
+    <npt-outdoor-graph></npt-outdoor-graph>
+    <npt-weather-forecast></npt-weather-forecast>
+
+    <npt-thermostat></npt-thermostat>
+    <npt-light-switch [name]="'Family Room'"></npt-light-switch>
+    <npt-light-switch [name]="'Outside'" [state]="false"></npt-light-switch>
+    <npt-light-switch [name]="'Garage'"></npt-light-switch>
+    <npt-run-script [name]="'Bed Time'" [icon]="'night_shelter'"></npt-run-script>
+
+    <npt-schedule></npt-schedule>
+    <npt-music></npt-music>
+    <npt-small-widget class="garage" [data]="garage"></npt-small-widget>
+    <npt-small-widget class="sprinkler" [data]="sprinkler"></npt-small-widget>
+
+    <npt-camera [name]="'Camera 1'"></npt-camera>
+    <npt-camera [name]="'Camera 2'"></npt-camera>
+
+    <npt-power-usage></npt-power-usage>
+    <div class="widget" style="grid-column: span 8;">
+        <h2>Placeholder</h2>
+    </div>
+</div>

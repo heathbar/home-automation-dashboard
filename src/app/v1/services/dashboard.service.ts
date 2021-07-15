@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map, distinctUntilChanged, distinctUntilKeyChanged, filter, withLatestFrom, startWith, switchMap, switchMapTo, tap, shareReplay } from 'rxjs/operators';
 import { Observable, interval, of, NEVER } from 'rxjs';
 import * as moment from 'moment';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

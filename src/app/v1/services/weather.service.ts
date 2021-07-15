@@ -2,7 +2,7 @@ import { HomeAssistantService } from './home-assistant.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Forecast } from '../forecast.model';
+import { Forecast } from '../../forecast.model';
 import * as moment from 'moment';
 
 @Injectable({

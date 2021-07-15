@@ -1,0 +1,34 @@
+@import '../widget.scss';
+
+$size: 42px;
+
+div {
+    @extend .widget;
+
+    .mat-icon-button {
+
+        width: $size;
+        height: $size;
+        line-height: $size;
+
+        .mat-icon {
+            font-size: $size;
+            width: $size;
+            height: $size;
+            line-height: $size;
+            color: rgb(255, 255, 255, .8);
+        }
+    }
+
+    h2 {
+        font-size: 1em;
+        font-weight: 600;
+    }
+
+    &.off .mat-icon-button .mat-icon {
+        color: rgb(255, 255, 255, .4);
+    }
+
+
+}
+

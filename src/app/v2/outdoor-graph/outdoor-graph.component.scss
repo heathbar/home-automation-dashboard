@@ -1,0 +1,24 @@
+@import '../widget.scss';
+
+:host {
+    @extend .widget;
+
+    .container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 4px;
+        align-items: center;
+
+        .temperature {
+            color: #2c8ef9;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            
+        }
+        .humidity {
+            color: #d32dac;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+        }
+    }
+}

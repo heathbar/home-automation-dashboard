@@ -1,0 +1,21 @@
+:host {
+    background-color: #182037;
+    padding: 16px;
+    color: #ffffff;
+
+    .container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-gap: 16px;
+
+
+        .bold {
+            font-weight: 600;
+        }
+
+    }
+
+    h2:not(:first-child) {
+        margin-top: 12px;
+    }
+}

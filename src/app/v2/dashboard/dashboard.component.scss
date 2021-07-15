@@ -1,0 +1,82 @@
+:host {
+    background-color: #0e1121;
+    color: #ffffff;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto  350px 205px auto auto auto 300px auto auto;
+    grid-gap: 12px;
+    height: 1920px;
+    padding: 16px;
+    background-color: #0e1121;
+    
+    
+    npt-header {
+        grid-column: span 12;
+    }
+
+    .widget {
+        mat-icon {
+            padding: 4px;
+            border-radius: 4px;
+        }
+        div {
+            width: 100%;
+            text-align: right;
+        }
+    }
+
+    .garage {
+        grid-column: span 4;
+    }
+
+    .sprinkler {
+        grid-column: span 4;
+    }
+
+    npt-weather-widget {
+        grid-column: span 8;
+    }
+
+    npt-weather-current-conditions {
+        grid-column: span 4;
+    }
+
+    npt-outdoor-graph {
+        grid-column: span 6;
+    }
+
+    npt-weather-forecast {
+        grid-column: span 6;
+    }
+
+    npt-schedule {
+        grid-column: span 8;
+    }
+
+    npt-music {
+        grid-column: span 4;
+        grid-row: span 2;
+    }
+    npt-light-switch {
+        grid-column: span 2;
+    }
+    npt-run-script {
+        grid-column: span 2;
+    }
+    npt-thermostat {
+        grid-column: span 4;
+    }
+    npt-camera {
+        grid-column: span 6;
+    }
+    npt-power-usage {
+        grid-column: span 4;
+    }    
+}
+
+mat-icon.blue {
+    background-color: #1486f8;
+}

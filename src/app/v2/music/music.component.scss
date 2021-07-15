@@ -1,0 +1,34 @@
+:host {
+    background-color: #182037;
+    img {
+        // margin: 10%;
+        width: 100%;
+        object-fit: contain;
+        // border-radius: 50%;
+    }
+
+    .info {
+        margin-top: 16px;        
+
+        h2 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 2em;
+        }
+        h3 {
+            margin-bottom: 24px;
+        }
+    }
+
+    .volume {
+        width: 100%;
+        margin: 8px;
+
+        mat-icon {
+            margin: 16px;
+        }
+        mat-slider {
+            width: 100%;
+        }
+    }
+}

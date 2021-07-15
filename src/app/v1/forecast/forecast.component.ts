@@ -1,4 +1,4 @@
-import { Forecast } from './../forecast.model';
+import { Forecast } from '../../forecast.model';
 import { Component, Input } from '@angular/core';
 
 @Component({

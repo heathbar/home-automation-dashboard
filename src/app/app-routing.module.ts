@@ -1,17 +1,12 @@
-import { CameraComponent } from './camera/camera.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MusicComponent } from './music/music.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'v1', pathMatch: 'full'},
 
-  { path: 'home', component: HomeComponent },
-  { path: 'music', component: MusicComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'cameras', component: CameraComponent }
+  { path: 'v1', loadChildren: () => import('./v1/v1.module').then(m => m.V1Module) },
+  { path: 'v2', loadChildren: () => import('./v2/v2.module').then(m => m.V2Module) }
+
 ];
 
 @NgModule({
