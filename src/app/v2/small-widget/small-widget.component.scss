@@ -1,9 +1,9 @@
+@import '../widget.scss';
+
 $dim-white: rgb(255, 255, 255, .6);
 
 :host {
-    background-color: #182037;
-    padding: 16px;
-    padding-bottom: 8px;
+    @extend .widget;    
 
     .container {
         display: grid;
@@ -28,7 +28,6 @@ $dim-white: rgb(255, 255, 255, .6);
         }
 
         div {
-            font-size: 3em;
             margin-bottom: 16px;
         }
 
@@ -36,7 +35,7 @@ $dim-white: rgb(255, 255, 255, .6);
             grid-column: span 2;
             width: 100%;
             border-top: 1px solid rgb(255, 255, 255, .1);
-            padding-top: 8px;
+            padding-top: 16px;
             margin-bottom: 0;
             font-size: .9em;
             color: $dim-white;

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  indoorTemp = {
+  indoor = {
     icon: 'thermostat',
     color: '#1486f8',
     label: 'Indoor Temperature',

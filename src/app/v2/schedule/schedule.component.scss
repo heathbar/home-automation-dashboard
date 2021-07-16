@@ -1,24 +1,31 @@
-table {
-    background: none;
-    width: 100%;
+@import '../widget';
 
-    ::ng-deep thead {
-        display: none;
-    }
+:host {
+    @extend .widget;
+    padding-bottom: 4px;
 
-    ::ng-deep tbody tr:last-child td {
-        border: none;
-    }
+    table {
+        background: none;
+        width: 100%;
 
-    ::ng-deep .mat-cell {
-        font-size: 1em;
-    }
+        ::ng-deep thead {
+            display: none;
+        }
 
-    .column0 {
-        padding-left:0;
-        width: 8px;
-    }
-    .column1 {
-        padding-left: 16px;
+        ::ng-deep tbody tr:last-child td {
+            border: none;
+        }
+
+        ::ng-deep .mat-cell {
+            font-size: 1em;
+        }
+
+        .column0 {
+            padding-left:0;
+            width: 8px;
+        }
+        .column1 {
+            padding-left: 16px;
+        }
     }
 }

@@ -6,10 +6,10 @@
 .container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto  350px 205px auto auto auto 300px auto auto;
+    grid-template-rows: auto 200px auto 190px auto auto auto 300px auto auto;
     grid-gap: 12px;
     height: 1920px;
-    padding: 16px;
+    padding: 12px;
     background-color: #0e1121;
     
     
@@ -28,6 +28,9 @@
         }
     }
 
+    .indoor {
+        grid-column: span 4;
+    }
     .garage {
         grid-column: span 4;
     }
@@ -38,9 +41,13 @@
 
     npt-weather-widget {
         grid-column: span 8;
+        grid-row: span 2;
     }
 
     npt-weather-current-conditions {
+        grid-column: span 4;
+    }
+    npt-weather-today {
         grid-column: span 4;
     }
 

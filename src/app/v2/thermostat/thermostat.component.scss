@@ -1,29 +1,43 @@
+@import '../widget.scss';
+
+$dim-white: rgb(255, 255, 255, .6);
+
 :host {
-    background-color: #182037;
-    padding: 16px;
+    @extend .widget;    
 
     .container {
         display: grid;
-        grid-template-columns: auto 1fr;
-        grid-gap: 0 16px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 24px 32px;
+        grid-gap: 24px 0px;
+        // justify-items: center;
+        align-items: end;
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+        .value {
+            grid-row: span 2;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .mat-display-4 {
+            line-height: 56px;
+        }
+
+        .mat-title {
+            margin-bottom: 8px;
+        }
 
         .icon {            
-            grid-row: span 2 / auto;
-            padding: 4px;
-            border-radius: 48px;
-            height: 42px;
-            width: 42px;
-            font-size: 42px;
-        }
-
-        label {
-            font-weight: 600;
-            font-size: 14px;
-            color: rgb(255, 255, 255, .6)
-        }
-
-        div {
-            font-size: 32px;
+            grid-row: span 2;
+            padding: 0 4px;
+            border-radius: 4px;
+            height: 24px;
+            width: 24px;
+            font-size: 24px;
         }
     }
 }

@@ -1,19 +1,16 @@
 header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
     background-color: #182037;
     padding: 16px;
     
-    h1 {
-        margin-bottom: 0;        
-        font-size: 14px;
-        font-weight: bold;
+    h1, .mat-headline {
+        margin-bottom: 0;
     }
 
-    font: 600 24px / 32px Roboto, "Helvetica Neue", sans-serif;
-    
     .date {
-        text-align: center;        
+        text-align: center;
     }
     .clock {
         text-align: right;

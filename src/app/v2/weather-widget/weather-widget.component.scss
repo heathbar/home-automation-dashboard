@@ -1,38 +1,35 @@
-:host {
-    position: relative;
-    overflow: hide;
+
+.background-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 225px 225px 0 0;
+    border-color: rgb(0, 0, 0, .3) transparent transparent transparent;
 }
 
 .container {
     display: grid;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 1fr;
     height: 100%;
 
     header {
         padding: 16px;
         z-index: 1;
 
-        h1 {
+        h2 {
             grid-column: span 8;
+            margin-bottom: 8px;
         }
 
         p.temperature {
             grid-column: span 8;
-            font-size: 4em;
+            margin-bottom: 0;
         }
 
         p.condition {
             grid-column: span 8;
+            font-weight: 600;
         }
     }
-
-}
-
-.background {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 200px 200px 0 0;
-    border-color: rgb(0, 0, 0, .3) transparent transparent transparent;
 }

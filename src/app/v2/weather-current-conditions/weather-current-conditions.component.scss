@@ -1,12 +1,14 @@
+@import '../widget.scss';
+
 :host {
+    @extend .widget;
     background-color: #182037;
-    padding: 16px;
     color: #ffffff;
 
     .container {
         display: grid;
         grid-template-columns: auto 1fr;
-        grid-gap: 16px;
+        grid-gap: 12px;
 
 
         .bold {

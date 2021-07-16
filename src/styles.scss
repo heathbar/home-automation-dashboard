@@ -35,7 +35,12 @@ html, body {
     }
 }
 
+html, body {
+    max-height: 1920px;
+    // overflow: clip;
+}
 
 .widget {
     @extend .widget;
 }
+

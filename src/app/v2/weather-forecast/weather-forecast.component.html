@@ -2,9 +2,10 @@
     <h2>Forecast</h2>
     <div class="forecast">
         <div *ngFor="let day of days">
-            <label>{{day.label}}</label>
+            <label class="mat-caption">{{day.label}}</label>
             <mat-icon [ngClass]="{ 'yellow': isYellow(day.icon), 'blue': isBlue(day.icon) }">{{day.icon}}</mat-icon>
-            <label>{{day.high}}° | {{day.low}}°</label>
+            <p>{{day.high}}° | {{day.low}}°</p>
         </div>
     </div>
 </div>
+

@@ -1,34 +1,31 @@
-<div class="widget">
+<h2>Schedule</h2>
 
-    <h2>Schedule</h2>
+<div fxLayout="row" fxLayoutGap="24px" class="row1">
 
-    <div fxLayout="row" fxLayoutGap="24px" class="row1">
+    <table mat-table [dataSource]="appointments$ | async">
+        <ng-container matColumnDef="day-color">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" class="column0" [ngClass]="element.dayColor"></td>
+        </ng-container>
 
-        <table mat-table [dataSource]="appointments$ | async">
-            <ng-container matColumnDef="day-color">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element" class="column0" [ngClass]="element.dayColor"></td>
-            </ng-container>
+        <ng-container matColumnDef="day">
+            <th mat-header-cell *matHeaderCellDef>Day</th>
+            <td mat-cell *matCellDef="let element" class="column1">{{ element.day }}</td>
+        </ng-container>
 
-            <ng-container matColumnDef="day">
-                <th mat-header-cell *matHeaderCellDef>Day</th>
-                <td mat-cell *matCellDef="let element" class="column1">{{ element.day }}</td>
-            </ng-container>
+        <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>Time</th>
+            <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+        </ng-container>
 
-            <ng-container matColumnDef="time">
-                <th mat-header-cell *matHeaderCellDef>Time</th>
-                <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-            </ng-container>
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Event</th>
+            <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
 
-            <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef>Event</th>
-                <td mat-cell *matCellDef="let element">{{ element.title }}</td>
-            </ng-container>
+        <tr mat-header-row *matHeaderRowDef="apptColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: apptColumns;"></tr>
+    </table>
 
-            <tr mat-header-row *matHeaderRowDef="apptColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: apptColumns;"></tr>
-        </table>
-    
 
-    </div>
 </div>

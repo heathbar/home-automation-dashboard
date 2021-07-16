@@ -27,7 +27,7 @@ export class LineChartComponent implements OnInit {
     chart: {
       type: 'areaspline',
       backgroundColor: 'transparent',
-      height: '150px'
+      height: '140px'
     },
     colors: this.colors,
     title: {

@@ -1,5 +1,28 @@
+
+
 <div class="container">
-    <mat-icon class="icon" [ngStyle]="{'background-color': '#1486f8'}">thermostat</mat-icon>
-    <label>Indoor Temperature</label>
-    <div>75°</div>
+
+    <h2>Indoor</h2>
+    
+
+    <div class="value mat-display-4">
+        75°
+        <!-- <mat-slider value="75"></mat-slider> -->
+    </div>
+    
+
+    <!-- <mat-icon class="icon" [ngStyle]="{'background-color': '#1486f8'}">ac_unit</mat-icon> -->
+    <!-- <label>Indoor Temperature</label> -->
+    <!-- <div class="mat-display-2">75°</div> -->
+    <div class="value">
+        <div class="mat-title">33%</div>
+        Humidity
+    </div>
+
+    <div>
+        <mat-icon class="icon">ac_unit</mat-icon>
+        <mat-icon class="icon">air</mat-icon>
+    </div>
+    
 </div>
+
