@@ -26,7 +26,7 @@
     "angular-highcharts": "^12.0.0",
     "highcharts": "^9.1.2",
     "home-assistant-js-websocket": "^4.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
